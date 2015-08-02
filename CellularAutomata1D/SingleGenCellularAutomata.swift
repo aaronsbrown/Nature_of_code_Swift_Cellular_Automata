@@ -32,34 +32,28 @@ class SingleGenCellularAutomata {
         ruleSet = RuleSet.random()
     }
     
+    
     func breed() {
         
-        var nextGen = [Cell](count: cells.count, repeatedValue: Cell(value: 0))
-   
-        for var i = 0; i < cells.count; i++ {
-            
-            switch(i) {
-            case 0:
-                nextGen[i] = calculateCellState(cells[cells.count - 1], current: cells[i], next: cells[i+1])
-            case cells.count - 1:
-                nextGen[i] = calculateCellState(cells[i-1], current: cells[i], next: cells[0])
-            default:
-                nextGen[i] = calculateCellState(cells[i-1], current: cells[i], next: cells[i+1])
-            }
+        for cell in cells {
+            cell.saveState()
         }
         
-        cells = nextGen
+        for var i = 0; i < cells.count; i++ {
+
+            var prevIndex = i == 0 ? cells.count - 1 : i - 1
+            var nextIndex = i == cells.count - 1 ? 0 : i + 1
+
+            var cell = cells[i]
+            cell.value = calculateCellState(cells[prevIndex], current: cell, next: cells[nextIndex])
+        }
+        
         numGenerations++
     }
     
-    func calculateCellState(prev: Cell, current: Cell, next: Cell) -> Cell {
-        
-        // all random values
-        // return Cell(value: Int(arc4random_uniform(2)))
-        
-        let cellContext = prev.description + current.description + next.description
-        let ruleIndex = Int(strtoul(cellContext, nil, 2)) // convert from binary to decimal
-        let value = ruleSet.rules.reverse()[ruleIndex]
-        return  Cell(value: value)
+    func calculateCellState(prev: Cell, current: Cell, next: Cell) -> Int {
+        let binaryString = prev.prevValueString + current.prevValueString + next.prevValueString
+        let ruleIndex = Int(strtoul(binaryString, nil, 2))
+        return ruleSet.rules.reverse()[ruleIndex]
     }
 }

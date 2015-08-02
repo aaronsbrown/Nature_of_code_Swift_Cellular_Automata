@@ -6,22 +6,30 @@
 //  Copyright (c) 2015 Aaron Brown. All rights reserved.
 //
 
-struct Cell: Printable {
+class Cell {
     
     var value: Int
+    var prevValue: Int
+    
+    init(value: Int) {
+        self.value = value
+        self.prevValue = value
+    }
+    
     var isOn: Bool {
         get {
             return value > 0
         }
     }
-    var description: String {
+   
+    var prevValueString: String {
         get {
-            return String(value)
+            return String(prevValue)
         }
     }
     
-    init(value: Int) {
-        self.value = value
+    func saveState() {
+        prevValue = value
     }
 }
 
