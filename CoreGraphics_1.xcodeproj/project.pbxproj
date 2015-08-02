@@ -87,14 +87,14 @@
 		12248AFB1B69DC4700B561B8 /* CoreGraphics_1 */ = {
 			isa = PBXGroup;
 			children = (
-				12248B281B6DC9C900B561B8 /* PushButtonView.swift */,
-				12248B261B6D869B00B561B8 /* SingleGenCellularAutomata.swift */,
-				12248B2A1B6DD49100B561B8 /* RuleSet.swift */,
 				12248AFE1B69DC4700B561B8 /* AppDelegate.swift */,
 				12248B001B69DC4700B561B8 /* CellularAutomataViewController.swift */,
-				12248B021B69DC4700B561B8 /* Main.storyboard */,
 				12248B221B6B2A8A00B561B8 /* CellView.swift */,
+				12248B281B6DC9C900B561B8 /* PushButtonView.swift */,
+				12248B021B69DC4700B561B8 /* Main.storyboard */,
 				12248B241B6D834C00B561B8 /* Cell.swift */,
+				12248B261B6D869B00B561B8 /* SingleGenCellularAutomata.swift */,
+				12248B2A1B6DD49100B561B8 /* RuleSet.swift */,
 				12248B051B69DC4700B561B8 /* Images.xcassets */,
 				12248B071B69DC4700B561B8 /* LaunchScreen.xib */,
 				12248AFC1B69DC4700B561B8 /* Supporting Files */,

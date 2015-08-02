@@ -11,14 +11,27 @@ import UIKit
 @IBDesignable
 class PushButtonView: UIButton {
 
-    @IBInspectable var fillColor: UIColor = UIColor.greenColor()
+    var fillColor: UIColor = UIColor.blackColor()
+    var strokeColor: UIColor = UIColor.whiteColor()
+    
     @IBInspectable var isAddButton: Bool = true
     
-    
     override func drawRect(rect: CGRect) {
-        var path = UIBezierPath(ovalInRect: rect)
+        
+        if !isAddButton {
+            fillColor = UIColor.whiteColor()
+            strokeColor = UIColor.blackColor()
+        }
+        
         fillColor.setFill()
+        strokeColor.setStroke()
+        
+        var path = UIBezierPath(ovalInRect: rect)
         path.fill()
+        if !isAddButton {
+            path.lineWidth = 1.0
+            path.stroke()
+        }
         
         let strokeSize: CGFloat = 3.0
         let strokeLength: CGFloat = min(bounds.width, bounds.height) * 0.6
@@ -45,8 +58,8 @@ class PushButtonView: UIButton {
                 y: bounds.height/2 - strokeLength/2))
         }
         
-        UIColor.whiteColor().setStroke()
         plusPath.stroke()
+        
 
     }
 }
