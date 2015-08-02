@@ -11,8 +11,9 @@ import UIKit
 @IBDesignable
 class CellView: UIView {
 
-    let cellSize: Int = 2
-    var model: CA?
+    let cellSize: Int = 1
+    var model: CellularAutomata!
+    var ruleNumber: Int = 0
     
     override func drawRect(rect: CGRect) {
         
@@ -24,42 +25,42 @@ class CellView: UIView {
         // set up cellular automata
         var maxGens = Int(bounds.height) / cellSize
         var cellsPerGen = Int(bounds.width) / cellSize
-        let ca = CA(numCells: cellsPerGen)
+        var model = CellularAutomata(numCells: cellsPerGen, ruleNumber: ruleNumber)
+        println(model.currentRuleSet)
         
         // draw cellular automata
         for var generation = 0; generation < maxGens; generation++ {
-            for var cellIndex = 0; cellIndex < ca.cells.count; cellIndex++ {
-                getFillColor(ca.cells[cellIndex]).setFill()
-                CGContextAddRect(context, CGRect(x: cellSize * cellIndex, y: ca.currentGen * cellSize, width: cellSize, height: cellSize))
+            for var cellIndex = 0; cellIndex < model.cells.count; cellIndex++ {
+                getFillColor(model.cells[cellIndex]).setFill()
+                CGContextAddRect(context, CGRect(x: cellSize * cellIndex, y: model.currentGen * cellSize, width: cellSize, height: cellSize))
                 CGContextDrawPath(context, kCGPathFillStroke)
             }
-            ca.generate()
+            model.generate()
         }
+        
     }
   
+    func incrementRuleNumber() {
+        if ruleNumber >= 255 {
+            ruleNumber = 0
+        } else {
+            ruleNumber++
+        }
+    }
+    
+    func decrementRuleNumber() {
+        if ruleNumber <= 0 {
+            ruleNumber = 255
+        } else {
+            ruleNumber--
+        }
+    }
+    
+    func randomize() {
+        ruleNumber = Int(arc4random_uniform(256))
+    }
+    
     func getFillColor(cell:Cell) -> UIColor {
         return cell.isOn ? UIColor.darkGrayColor() : UIColor.whiteColor()
     }
-    
-    // MARK: OLD SHIT
-    
-    func oldDrawCells(cells: [Cell]) {
-        let rows = Int(bounds.height) / cellSize
-        let cols = Int(bounds.width) / cellSize
-        
-        var context = UIGraphicsGetCurrentContext()
-        UIColor.blackColor().setStroke()
-        
-        for var row = 0; row < rows; row++ {
-            for var col = 0; col < cols; col++ {
-                
-                var index = row*Int(bounds.width) + col
-                getFillColor(cells[index]).setFill()
-                CGContextAddRect(context, CGRect(x: cellSize * row, y: cellSize * col, width: cellSize, height: cellSize))
-                CGContextDrawPath(context, kCGPathFillStroke)
-            }
-        }
-    }
-    
-    
 }

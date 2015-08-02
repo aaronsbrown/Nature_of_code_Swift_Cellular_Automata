@@ -13,14 +13,28 @@ class CellularAutomataViewController: UIViewController {
     @IBOutlet weak var cellView: CellView!
     @IBOutlet weak var label: UILabel!
    
+    @IBAction
+    func incrementRule(sender: PushButtonView) {
+        cellView.incrementRuleNumber()
+        label.text = "Wolfram Rule No: \(cellView.ruleNumber)"
+        cellView.setNeedsDisplay()
+    }
+    
+    @IBAction func DecrementRule(sender: PushButtonView) {
+        cellView.decrementRuleNumber()
+        label.text = "Wolfram Rule No: \(cellView.ruleNumber)"
+        cellView.setNeedsDisplay()
+    }
+    
     override func viewDidLoad() {
+        label.text = "Wolfram Rule No: \(cellView.ruleNumber)"
     }
 
-    @IBAction func generate(sender: UIButton) {
+    @IBAction
+    func generate(sender: UIButton) {
+        cellView.randomize()
+        label.text = "Wolfram Rule No: \(cellView.ruleNumber)"
         cellView.setNeedsDisplay()
-        if (cellView.model != nil) {
-            label.text = cellView.model?.currentRuleSet
-        }
     }
 
 }
