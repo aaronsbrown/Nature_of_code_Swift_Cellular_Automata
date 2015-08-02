@@ -53,11 +53,15 @@ class CellularAutomataViewController: UIViewController {
     }
     
     @IBAction func updateCellSize(sender: UISlider) {
-        cellView.cellSize = Int(sender.value)
-//        cellView.calcGenerations()
-//        automata = SingleGenCellularAutomata(numCells: cellView.cellsPerGen, ruleNumber: ruleNumber)
-        cellView.setNeedsDisplay()
+        
         sliderLabel.text = "\(cellView.cellSize)"
+        cellView.cellSize = Int(sender.value)
+
+        cellView.calcGenerations()
+        cellView.automata = SingleGenCellularAutomata(numCells: cellView.cellsPerGen, ruleNumber: ruleNumber)
+        
+        cellView.setNeedsDisplay()
+        
 
     }
     

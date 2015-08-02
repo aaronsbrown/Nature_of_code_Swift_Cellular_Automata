@@ -18,7 +18,7 @@ class CellView: UIView {
     var maxGens: Int!
     var cellsPerGen: Int!
     
-    override func didMoveToSuperview() {
+    override func willMoveToSuperview(newSuperview: UIView?) {
         calcGenerations()
     }
     
@@ -28,7 +28,6 @@ class CellView: UIView {
     }
     
     override func drawRect(rect: CGRect) {
-        
         // set up graphics context
         var context = UIGraphicsGetCurrentContext()
         UIColor.darkGrayColor().setStroke()
