@@ -28,7 +28,7 @@ class CellularAutomataViewController: UIViewController {
     
     @IBAction
     func incrementRule(sender: PushButtonView) {
-        if ruleNumber >= automata?.ruleSet.maxRuleNum {
+        if ruleNumber >= automata?.ruleSet.maxRuleNum { 
             ruleNumber = 0
         } else {
             ruleNumber++

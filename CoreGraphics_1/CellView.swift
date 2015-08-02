@@ -33,13 +33,16 @@ class CellView: UIView {
         UIColor.darkGrayColor().setStroke()
         CGContextSetLineWidth(context, 0.05)
 
+        // calculate offset for centering graphics
+        let centeringOffset = (Int(bounds.width) - (cellsPerGen * cellSize)) / 2
+        
         // draw cellular automata
         if let automata = automata {
             for var generation = 0; generation < maxGens; generation++ {
                 for var cellIndex = 0; cellIndex < automata.cells.count; cellIndex++ {
                     getFillColor(automata.cells[cellIndex]).setFill()
                     CGContextAddRect(context,
-                        CGRect(x: cellSize * cellIndex,
+                        CGRect(x: cellSize * cellIndex + centeringOffset,
                                y: automata.numGenerations * cellSize,
                                width: cellSize,
                                height: cellSize)
