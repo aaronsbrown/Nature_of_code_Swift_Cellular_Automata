@@ -5,49 +5,14 @@
 //  Created by Aaron Brown on 8/1/15.
 //  Copyright (c) 2015 Aaron Brown. All rights reserved.
 //
-
-
 import Foundation
 
-struct RuleSet {
-    var rules = [Int]()
+class SingleGenCellularAutomata {
     
-    static func random() -> RuleSet {
-        var ruleSet = RuleSet()
-        for var i = 0; i < 8; i++ {
-            ruleSet.rules.append( Int(arc4random_uniform(2)) )
-        }
-        return ruleSet
-    }
-    
-    static func forRuleNumber(ruleNumber: Int) -> RuleSet {
-        var ruleSet = RuleSet()
-        
-        var bitArray = Array(String(ruleNumber, radix: 2))
-        ruleSet.rules =
-            Array(count: max(0, 8 - bitArray.count), repeatedValue:0) +
-            bitArray.map { String($0).toInt()! }
-        return ruleSet
-    }
-    
-    var ruleNumber: String {
-        var binaryString = ""
-        for rule in rules {
-            binaryString += "\(rule)"
-        }
-        return String(Int(strtoul(binaryString, nil, 2)))
-    }
-}
-
-class CellularAutomata {
-    
-    var ruleSet = RuleSet.random()
-    var currentRuleSet: String {
-        get { return ruleSet.ruleNumber }
-    }
+    var ruleSet: RuleSet!
     
     var cells = [Cell]()
-    var currentGen = 0
+    var numGenerations = 0
 
     init(numCells: Int, ruleNumber: Int) {
         
@@ -57,14 +22,17 @@ class CellularAutomata {
         cells[cells.count / 2] = Cell(value: 1)
         
         ruleSet = RuleSet.forRuleNumber(ruleNumber)
-        
+    }
+    
+    convenience init(numCells: Int) {
+        self.init(numCells: numCells, ruleNumber: 0)
     }
     
     func randomize() {
         ruleSet = RuleSet.random()
     }
     
-    func generate() {
+    func breed() {
         
         var nextGen = [Cell](count: cells.count, repeatedValue: Cell(value: 0))
    
@@ -81,7 +49,7 @@ class CellularAutomata {
         }
         
         cells = nextGen
-        currentGen++
+        numGenerations++
     }
     
     func calculateCellState(prev: Cell, current: Cell, next: Cell) -> Cell {
@@ -90,8 +58,8 @@ class CellularAutomata {
         // return Cell(value: Int(arc4random_uniform(2)))
         
         let cellContext = prev.description + current.description + next.description
-        let ruleIndex = Int(strtoul(cellContext, nil, 2))
-        let value = ruleSet.rules[ruleIndex]
+        let ruleIndex = Int(strtoul(cellContext, nil, 2)) // convert from binary to decimal
+        let value = ruleSet.rules.reverse()[ruleIndex]
         return  Cell(value: value)
     }
 }

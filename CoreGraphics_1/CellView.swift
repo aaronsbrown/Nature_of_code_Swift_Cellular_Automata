@@ -8,12 +8,13 @@
 
 import UIKit
 
-@IBDesignable
+//@IBDesignable
 class CellView: UIView {
 
-    let cellSize: Int = 1
-    var model: CellularAutomata!
-    var ruleNumber: Int = 0
+    var automata: SingleGenCellularAutomata?
+    var cellSize: Int = 4
+    var ruleNumber: Int = 30
+    
     
     override func drawRect(rect: CGRect) {
         
@@ -25,23 +26,25 @@ class CellView: UIView {
         // set up cellular automata
         var maxGens = Int(bounds.height) / cellSize
         var cellsPerGen = Int(bounds.width) / cellSize
-        var model = CellularAutomata(numCells: cellsPerGen, ruleNumber: ruleNumber)
-        println(model.currentRuleSet)
-        
+        automata = SingleGenCellularAutomata(numCells: cellsPerGen, ruleNumber: ruleNumber)
+
         // draw cellular automata
-        for var generation = 0; generation < maxGens; generation++ {
-            for var cellIndex = 0; cellIndex < model.cells.count; cellIndex++ {
-                getFillColor(model.cells[cellIndex]).setFill()
-                CGContextAddRect(context, CGRect(x: cellSize * cellIndex, y: model.currentGen * cellSize, width: cellSize, height: cellSize))
-                CGContextDrawPath(context, kCGPathFillStroke)
+        if let automata = automata {
+            for var generation = 0; generation < maxGens; generation++ {
+                for var cellIndex = 0; cellIndex < automata.cells.count; cellIndex++ {
+                    getFillColor(automata.cells[cellIndex]).setFill()
+                    CGContextAddRect(context, CGRect(x: cellSize * cellIndex, y: automata.numGenerations * cellSize, width: cellSize, height: cellSize))
+                    CGContextDrawPath(context, kCGPathFillStroke)
+                }
+                automata.breed()
             }
-            model.generate()
         }
         
     }
   
+    // TODO these numbers
     func incrementRuleNumber() {
-        if ruleNumber >= 255 {
+        if ruleNumber >= automata?.ruleSet.maxRuleNum {
             ruleNumber = 0
         } else {
             ruleNumber++
@@ -50,7 +53,7 @@ class CellView: UIView {
     
     func decrementRuleNumber() {
         if ruleNumber <= 0 {
-            ruleNumber = 255
+            ruleNumber = automata!.ruleSet.maxRuleNum
         } else {
             ruleNumber--
         }

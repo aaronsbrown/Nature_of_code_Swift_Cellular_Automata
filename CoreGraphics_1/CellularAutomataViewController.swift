@@ -12,24 +12,35 @@ class CellularAutomataViewController: UIViewController {
 
     @IBOutlet weak var cellView: CellView!
     @IBOutlet weak var label: UILabel!
-   
+    @IBOutlet weak var sliderLabel: UILabel!
+
+    
+    override func viewDidLoad() {
+        label.text = "Rule No: \(cellView.ruleNumber)"
+        sliderLabel.text = "\(cellView.cellSize)"
+    }
+
+    
     @IBAction
     func incrementRule(sender: PushButtonView) {
         cellView.incrementRuleNumber()
-        label.text = "Wolfram Rule No: \(cellView.ruleNumber)"
+        label.text = "Rule No: \(cellView.ruleNumber) \(cellView.automata!.ruleSet!.rules)"
         cellView.setNeedsDisplay()
     }
     
-    @IBAction func DecrementRule(sender: PushButtonView) {
+    @IBAction func decrementRule(sender: PushButtonView) {
         cellView.decrementRuleNumber()
-        label.text = "Wolfram Rule No: \(cellView.ruleNumber)"
+        label.text = "Rule No: \(cellView.ruleNumber) \(cellView.automata!.ruleSet!.rules)"
         cellView.setNeedsDisplay()
     }
     
-    override func viewDidLoad() {
-        label.text = "Wolfram Rule No: \(cellView.ruleNumber)"
-    }
+    @IBAction func updateCellSize(sender: UISlider) {
+        cellView.cellSize = Int(sender.value)
+        sliderLabel.text = "\(cellView.cellSize)"
+        cellView.setNeedsDisplay()
 
+    }
+    
     @IBAction
     func generate(sender: UIButton) {
         cellView.randomize()
