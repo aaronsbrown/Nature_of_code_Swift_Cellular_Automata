@@ -31,14 +31,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		12248AF91B69DC4700B561B8 /* CoreGraphics_1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoreGraphics_1.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		12248AF91B69DC4700B561B8 /* CellularAutomata1D.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CellularAutomata1D.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		12248AFD1B69DC4700B561B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		12248AFE1B69DC4700B561B8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		12248B001B69DC4700B561B8 /* CellularAutomataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellularAutomataViewController.swift; sourceTree = "<group>"; };
 		12248B031B69DC4700B561B8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		12248B051B69DC4700B561B8 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		12248B081B69DC4700B561B8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		12248B0E1B69DC4700B561B8 /* CoreGraphics_1Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoreGraphics_1Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		12248B0E1B69DC4700B561B8 /* CellularAutomata1DTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CellularAutomata1DTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		12248B131B69DC4700B561B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		12248B141B69DC4700B561B8 /* CoreGraphics_1Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreGraphics_1Tests.swift; sourceTree = "<group>"; };
 		12248B221B6B2A8A00B561B8 /* CellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellView.swift; sourceTree = "<group>"; };
@@ -69,8 +69,8 @@
 		12248AF01B69DC4700B561B8 = {
 			isa = PBXGroup;
 			children = (
-				12248AFB1B69DC4700B561B8 /* CoreGraphics_1 */,
-				12248B111B69DC4700B561B8 /* CoreGraphics_1Tests */,
+				12248AFB1B69DC4700B561B8 /* CellularAutomata1D */,
+				12248B111B69DC4700B561B8 /* CellularAutomata1D_Tests */,
 				12248AFA1B69DC4700B561B8 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -78,13 +78,13 @@
 		12248AFA1B69DC4700B561B8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				12248AF91B69DC4700B561B8 /* CoreGraphics_1.app */,
-				12248B0E1B69DC4700B561B8 /* CoreGraphics_1Tests.xctest */,
+				12248AF91B69DC4700B561B8 /* CellularAutomata1D.app */,
+				12248B0E1B69DC4700B561B8 /* CellularAutomata1DTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		12248AFB1B69DC4700B561B8 /* CoreGraphics_1 */ = {
+		12248AFB1B69DC4700B561B8 /* CellularAutomata1D */ = {
 			isa = PBXGroup;
 			children = (
 				12248AFE1B69DC4700B561B8 /* AppDelegate.swift */,
@@ -99,7 +99,7 @@
 				12248B071B69DC4700B561B8 /* LaunchScreen.xib */,
 				12248AFC1B69DC4700B561B8 /* Supporting Files */,
 			);
-			path = CoreGraphics_1;
+			path = CellularAutomata1D;
 			sourceTree = "<group>";
 		};
 		12248AFC1B69DC4700B561B8 /* Supporting Files */ = {
@@ -110,12 +110,13 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		12248B111B69DC4700B561B8 /* CoreGraphics_1Tests */ = {
+		12248B111B69DC4700B561B8 /* CellularAutomata1D_Tests */ = {
 			isa = PBXGroup;
 			children = (
 				12248B141B69DC4700B561B8 /* CoreGraphics_1Tests.swift */,
 				12248B121B69DC4700B561B8 /* Supporting Files */,
 			);
+			name = CellularAutomata1D_Tests;
 			path = CoreGraphics_1Tests;
 			sourceTree = "<group>";
 		};
@@ -130,9 +131,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		12248AF81B69DC4700B561B8 /* CoreGraphics_1 */ = {
+		12248AF81B69DC4700B561B8 /* CellularAutomata1D */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 12248B181B69DC4700B561B8 /* Build configuration list for PBXNativeTarget "CoreGraphics_1" */;
+			buildConfigurationList = 12248B181B69DC4700B561B8 /* Build configuration list for PBXNativeTarget "CellularAutomata1D" */;
 			buildPhases = (
 				12248AF51B69DC4700B561B8 /* Sources */,
 				12248AF61B69DC4700B561B8 /* Frameworks */,
@@ -142,14 +143,14 @@
 			);
 			dependencies = (
 			);
-			name = CoreGraphics_1;
+			name = CellularAutomata1D;
 			productName = CoreGraphics_1;
-			productReference = 12248AF91B69DC4700B561B8 /* CoreGraphics_1.app */;
+			productReference = 12248AF91B69DC4700B561B8 /* CellularAutomata1D.app */;
 			productType = "com.apple.product-type.application";
 		};
-		12248B0D1B69DC4700B561B8 /* CoreGraphics_1Tests */ = {
+		12248B0D1B69DC4700B561B8 /* CellularAutomata1DTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 12248B1B1B69DC4700B561B8 /* Build configuration list for PBXNativeTarget "CoreGraphics_1Tests" */;
+			buildConfigurationList = 12248B1B1B69DC4700B561B8 /* Build configuration list for PBXNativeTarget "CellularAutomata1DTests" */;
 			buildPhases = (
 				12248B0A1B69DC4700B561B8 /* Sources */,
 				12248B0B1B69DC4700B561B8 /* Frameworks */,
@@ -160,9 +161,9 @@
 			dependencies = (
 				12248B101B69DC4700B561B8 /* PBXTargetDependency */,
 			);
-			name = CoreGraphics_1Tests;
+			name = CellularAutomata1DTests;
 			productName = CoreGraphics_1Tests;
-			productReference = 12248B0E1B69DC4700B561B8 /* CoreGraphics_1Tests.xctest */;
+			productReference = 12248B0E1B69DC4700B561B8 /* CellularAutomata1DTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -183,7 +184,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 12248AF41B69DC4700B561B8 /* Build configuration list for PBXProject "CoreGraphics_1" */;
+			buildConfigurationList = 12248AF41B69DC4700B561B8 /* Build configuration list for PBXProject "CellularAutomata1D" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -196,8 +197,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				12248AF81B69DC4700B561B8 /* CoreGraphics_1 */,
-				12248B0D1B69DC4700B561B8 /* CoreGraphics_1Tests */,
+				12248AF81B69DC4700B561B8 /* CellularAutomata1D */,
+				12248B0D1B69DC4700B561B8 /* CellularAutomata1DTests */,
 			);
 		};
 /* End PBXProject section */
@@ -250,7 +251,7 @@
 /* Begin PBXTargetDependency section */
 		12248B101B69DC4700B561B8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 12248AF81B69DC4700B561B8 /* CoreGraphics_1 */;
+			target = 12248AF81B69DC4700B561B8 /* CellularAutomata1D */;
 			targetProxy = 12248B0F1B69DC4700B561B8 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -360,9 +361,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = CoreGraphics_1/Info.plist;
+				INFOPLIST_FILE = CellularAutomata1D/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = CellularAutomata1D;
 			};
 			name = Debug;
 		};
@@ -370,9 +371,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = CoreGraphics_1/Info.plist;
+				INFOPLIST_FILE = CellularAutomata1D/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = CellularAutomata1D;
 			};
 			name = Release;
 		};
@@ -388,9 +389,9 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = CoreGraphics_1Tests/Info.plist;
+				INFOPLIST_FILE = CellularAutomata1D/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = CellularAutomata1DTests;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CoreGraphics_1.app/CoreGraphics_1";
 			};
 			name = Debug;
@@ -403,9 +404,9 @@
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = CoreGraphics_1Tests/Info.plist;
+				INFOPLIST_FILE = CellularAutomata1D/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = CellularAutomata1DTests;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CoreGraphics_1.app/CoreGraphics_1";
 			};
 			name = Release;
@@ -413,7 +414,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		12248AF41B69DC4700B561B8 /* Build configuration list for PBXProject "CoreGraphics_1" */ = {
+		12248AF41B69DC4700B561B8 /* Build configuration list for PBXProject "CellularAutomata1D" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				12248B161B69DC4700B561B8 /* Debug */,
@@ -422,21 +423,23 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		12248B181B69DC4700B561B8 /* Build configuration list for PBXNativeTarget "CoreGraphics_1" */ = {
+		12248B181B69DC4700B561B8 /* Build configuration list for PBXNativeTarget "CellularAutomata1D" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				12248B191B69DC4700B561B8 /* Debug */,
 				12248B1A1B69DC4700B561B8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
-		12248B1B1B69DC4700B561B8 /* Build configuration list for PBXNativeTarget "CoreGraphics_1Tests" */ = {
+		12248B1B1B69DC4700B561B8 /* Build configuration list for PBXNativeTarget "CellularAutomata1DTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				12248B1C1B69DC4700B561B8 /* Debug */,
 				12248B1D1B69DC4700B561B8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

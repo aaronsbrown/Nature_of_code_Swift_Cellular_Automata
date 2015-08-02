@@ -11,21 +11,25 @@ import UIKit
 class CellularAutomataViewController: UIViewController {
 
     @IBOutlet weak var cellView: CellView!
+    
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var sliderLabel: UILabel!
     
-    var automata: SingleGenCellularAutomata?
+    var automata: SingleGenCellularAutomata? {
+        didSet {
+            cellView?.automata = automata
+        }
+    }
     var ruleNumber: Int = 1
 
-    
     override func viewDidLoad() {
         automata = SingleGenCellularAutomata(numCells: cellView.cellsPerGen, ruleNumber: 0)
-        label.text = "Rule No: \(ruleNumber)"
-        sliderLabel.text = "\(cellView.cellSize)"
         cellView.automata = automata
+
+        label.text = "Rule No: \(ruleNumber)"
+        sliderLabel.text = "cell size \(cellView.cellSize)"
     }
 
-    
     @IBAction
     func incrementRule(sender: PushButtonView) {
         if ruleNumber >= automata?.ruleSet.maxRuleNum { 
@@ -33,10 +37,10 @@ class CellularAutomataViewController: UIViewController {
         } else {
             ruleNumber++
         }
+        
         automata = SingleGenCellularAutomata(numCells: cellView.cellsPerGen, ruleNumber: ruleNumber)
-        cellView.automata = automata
+        
         label.text = "Rule No: \(ruleNumber) \(automata!.ruleSet!.rules)"
-        cellView.setNeedsDisplay()
     }
     
     @IBAction func decrementRule(sender: PushButtonView) {
@@ -47,31 +51,29 @@ class CellularAutomataViewController: UIViewController {
         }
         
         automata = SingleGenCellularAutomata(numCells: cellView.cellsPerGen, ruleNumber: ruleNumber)
-        cellView.automata = automata
+        
         label.text = "Rule No: \(ruleNumber) \(automata!.ruleSet!.rules)"
-        cellView.setNeedsDisplay()
     }
     
     @IBAction func updateCellSize(sender: UISlider) {
         
-        sliderLabel.text = "\(cellView.cellSize)"
+        
         cellView.cellSize = Int(sender.value)
-
         cellView.calcGenerations()
-        cellView.automata = SingleGenCellularAutomata(numCells: cellView.cellsPerGen, ruleNumber: ruleNumber)
         
-        cellView.setNeedsDisplay()
+        automata = SingleGenCellularAutomata(numCells: cellView.cellsPerGen, ruleNumber: ruleNumber)
         
-
+        sliderLabel.text = "cell size: \(cellView.cellSize)"
+        
     }
     
     @IBAction
     func generate(sender: UIButton) {
         ruleNumber = Int(arc4random_uniform(256))
+
         automata = SingleGenCellularAutomata(numCells: cellView.cellsPerGen, ruleNumber: ruleNumber)
-        cellView.automata = automata
-        label.text = "Wolfram Rule No: \(ruleNumber)"
-        cellView.setNeedsDisplay()
+
+        label.text = "Rule No: \(ruleNumber) \(automata!.ruleSet!.rules)"
     }
 
 }

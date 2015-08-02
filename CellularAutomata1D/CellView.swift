@@ -12,7 +12,11 @@ import UIKit
 class CellView: UIView {
 
     
-    var automata: SingleGenCellularAutomata?
+    var automata: SingleGenCellularAutomata? {
+        didSet {
+           setNeedsDisplay()
+        }
+    }
     var cellSize: Int = 10
     
     var maxGens: Int!
