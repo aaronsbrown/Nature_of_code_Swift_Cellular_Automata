@@ -42,7 +42,7 @@ class CellView: UIView {
         
         // draw cellular automata
         if let automata = automata {
-            for var generation = 0; generation < maxGens; generation++ {
+//            for var generation = 0; generation < maxGens; generation++ {
                 for var cellIndex = 0; cellIndex < automata.cells.count; cellIndex++ {
                     getFillColor(automata.cells[cellIndex]).setFill()
                     CGContextAddRect(context,
@@ -53,8 +53,7 @@ class CellView: UIView {
                     )
                     CGContextDrawPath(context, kCGPathFillStroke)
                 }
-                automata.breed()
-            }
+//            }
         }
     }
   

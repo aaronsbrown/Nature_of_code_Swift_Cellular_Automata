@@ -8,22 +8,29 @@
 
 import UIKit
 
-class CellularAutomataViewController: UIViewController {
+class CellularAutomataViewController: UIViewController, DisplayLinkerDelegate {
 
     @IBOutlet weak var cellView: CellView!
     
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var sliderLabel: UILabel!
     
+    var displayLinker: DisplayLinker?
+    
+    var elapsedFrameRate: CFTimeInterval = 0.0
+    
     var automata: SingleGenCellularAutomata? {
         didSet {
             cellView?.automata = automata
         }
     }
-    var ruleNumber: Int = 1
+    var ruleNumber: Int = 90
 
     override func viewDidLoad() {
-        automata = SingleGenCellularAutomata(numCells: cellView.cellsPerGen, ruleNumber: 0)
+        
+        displayLinker = DisplayLinker(delegate: self)
+        
+        automata = SingleGenCellularAutomata(numCells: cellView.cellsPerGen, ruleNumber: ruleNumber)
         cellView.automata = automata
 
         label.text = "Rule No: \(ruleNumber)"
@@ -74,6 +81,16 @@ class CellularAutomataViewController: UIViewController {
         automata = SingleGenCellularAutomata(numCells: cellView.cellsPerGen, ruleNumber: ruleNumber)
 
         label.text = "Rule No: \(ruleNumber) \(automata!.ruleSet!.rules)"
+    }
+    
+    func updateDisplay(deltaTime: CFTimeInterval) {
+        
+        elapsedFrameRate += deltaTime
+        if elapsedFrameRate > 1/30 {
+            cellView.setNeedsDisplay()
+            automata?.breed()
+            elapsedFrameRate = 0
+        }
     }
 
 }
