@@ -8,13 +8,13 @@
 
 import UIKit
 
-//@IBDesignable
 class CellView: UIView {
 
-    // TODO if this changes, set needs display
+    var dataSource: CellViewDataSource?
+
     var cellSize: Int = 10 {
         didSet {
-            calculateCellMatrix()
+            calculateRowsAndCols()
             setNeedsDisplay() // not doing much since generations not reset
         }
     }
@@ -22,15 +22,13 @@ class CellView: UIView {
     var rows: Int!
     var cols: Int!
     
-    var dataSource: CellViewDataSource?
-    
-    override func willMoveToSuperview(newSuperview: UIView?) {
-        calculateCellMatrix()
-    }
-    
-    func calculateCellMatrix() {
+    func calculateRowsAndCols() {
         rows = Int(bounds.height) / cellSize
         cols = Int(bounds.width) / cellSize
+    }
+    
+    override func willMoveToSuperview(newSuperview: UIView?) {
+        calculateRowsAndCols()
     }
     
     override func drawRect(rect: CGRect) {
@@ -45,20 +43,20 @@ class CellView: UIView {
         
         // draw cellular automata
         let cells = dataSource!.cells()
+        let currentRow = dataSource!.currentRowIndex()
         
-//            for var generation = 0; generation < maxGens; generation++ {
-                for var cellIndex = 0; cellIndex < cells.count; cellIndex++ {
-                    getFillColor(cells[cellIndex]).setFill()
-                    CGContextAddRect(context,
-                        CGRect(x: cellSize * cellIndex + centeringOffset,
-                               y: dataSource!.currentRowIndex() * cellSize,
-                               width: cellSize,
-                               height: cellSize)
-                    )
-                    CGContextDrawPath(context, kCGPathFillStroke)
-                }
-//            }
-      
+        if currentRow <= rows {
+            for var col = 0; col < cols; col++ {
+                getFillColor(cells[col]).setFill()
+                CGContextAddRect(context,
+                    CGRect(x: cellSize * col + centeringOffset,
+                           y: currentRow * cellSize,
+                           width: cellSize,
+                           height: cellSize)
+                )
+                CGContextDrawPath(context, kCGPathFillStroke)
+            }
+        }
     }
   
     func getFillColor(cell:Cell) -> UIColor {

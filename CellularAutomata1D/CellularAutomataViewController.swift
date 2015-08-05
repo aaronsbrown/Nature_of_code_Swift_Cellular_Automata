@@ -16,42 +16,27 @@ class CellularAutomataViewController: UIViewController, CellViewDataSource, Disp
     @IBOutlet weak var sliderLabel: UILabel!
     
     var displayLinker: DisplayLinker?
-    
     var elapsedFrameRate: CFTimeInterval = 0.0
     
     var automata: SingleGenCellularAutomata?
-       
     var ruleNumber: Int = 90
 
-    func cells() -> [Cell] {
-        if let automata = automata {
-            return automata.cells
-        } else {
-            return [Cell]()
-        }
-    }
     
-    func currentRowIndex() -> Int {
-        if let automata = automata {
-            return automata.numGenerations
-        } else {
-            return 0
-        }
-    }
-    
+    // MARK: initialize
     override func viewDidLoad() {
         super.viewDidLoad()
         
         displayLinker = DisplayLinker(delegate: self)
-        
         automata = SingleGenCellularAutomata(numCells: cellView.cols, ruleNumber: ruleNumber)
         
         cellView.dataSource = self
         
-   label.text = "Rule No: \(ruleNumber)"
+        label.text = "Rule No: \(ruleNumber)"
         sliderLabel.text = "cell size \(cellView.cellSize)"
     }
 
+    
+    // MARK: User Interaction
     @IBAction
     func incrementRule(sender: PushButtonView) {
         if ruleNumber >= automata?.ruleSet.maxRuleNum { 
@@ -88,8 +73,7 @@ class CellularAutomataViewController: UIViewController, CellViewDataSource, Disp
         
     }
     
-    @IBAction
-    func generate(sender: UIButton) {
+    @IBAction func generate(sender: UIButton) {
         ruleNumber = Int(arc4random_uniform(256))
 
         automata = SingleGenCellularAutomata(numCells: cellView.cols, ruleNumber: ruleNumber)
@@ -97,6 +81,26 @@ class CellularAutomataViewController: UIViewController, CellViewDataSource, Disp
         label.text = "Rule No: \(ruleNumber) \(automata!.ruleSet!.rules)"
     }
     
+    
+    // MARK: CellViewDataSource
+    func cells() -> [Cell] {
+        if let automata = automata {
+            return automata.cells
+        } else {
+            return [Cell]()
+        }
+    }
+    
+    func currentRowIndex() -> Int {
+        if let automata = automata {
+            return automata.numGenerations
+        } else {
+            return 0
+        }
+    }
+    
+
+    // MARK: DisplayLinkerDelegate
     func updateDisplay(deltaTime: CFTimeInterval) {
         
         elapsedFrameRate += deltaTime
