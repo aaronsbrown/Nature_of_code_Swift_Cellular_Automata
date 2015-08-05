@@ -11,50 +11,54 @@ import UIKit
 //@IBDesignable
 class CellView: UIView {
 
-    
-    var automata: SingleGenCellularAutomata? {
+    // TODO if this changes, set needs display
+    var cellSize: Int = 10 {
         didSet {
-           setNeedsDisplay()
+            calculateCellMatrix()
+            setNeedsDisplay() // not doing much since generations not reset
         }
     }
-    var cellSize: Int = 10
     
-    var maxGens: Int!
-    var cellsPerGen: Int!
+    var rows: Int!
+    var cols: Int!
+    
+    var dataSource: CellViewDataSource?
     
     override func willMoveToSuperview(newSuperview: UIView?) {
-        calcGenerations()
+        calculateCellMatrix()
     }
     
-    func calcGenerations() {
-        maxGens = Int(bounds.height) / cellSize
-        cellsPerGen = Int(bounds.width) / cellSize
+    func calculateCellMatrix() {
+        rows = Int(bounds.height) / cellSize
+        cols = Int(bounds.width) / cellSize
     }
     
     override func drawRect(rect: CGRect) {
+
         // set up graphics context
         var context = UIGraphicsGetCurrentContext()
         UIColor.darkGrayColor().setStroke()
         CGContextSetLineWidth(context, 0.05)
 
         // calculate offset for centering graphics
-        let centeringOffset = (Int(bounds.width) - (cellsPerGen * cellSize)) / 2
+        let centeringOffset = (Int(bounds.width) - (cols * cellSize)) / 2
         
         // draw cellular automata
-        if let automata = automata {
+        let cells = dataSource!.cells()
+        
 //            for var generation = 0; generation < maxGens; generation++ {
-                for var cellIndex = 0; cellIndex < automata.cells.count; cellIndex++ {
-                    getFillColor(automata.cells[cellIndex]).setFill()
+                for var cellIndex = 0; cellIndex < cells.count; cellIndex++ {
+                    getFillColor(cells[cellIndex]).setFill()
                     CGContextAddRect(context,
                         CGRect(x: cellSize * cellIndex + centeringOffset,
-                               y: automata.numGenerations * cellSize,
+                               y: dataSource!.currentRowIndex() * cellSize,
                                width: cellSize,
                                height: cellSize)
                     )
                     CGContextDrawPath(context, kCGPathFillStroke)
                 }
 //            }
-        }
+      
     }
   
     func getFillColor(cell:Cell) -> UIColor {

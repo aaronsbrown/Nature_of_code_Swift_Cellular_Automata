@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CellularAutomataViewController: UIViewController, DisplayLinkerDelegate {
+class CellularAutomataViewController: UIViewController, CellViewDataSource, DisplayLinkerDelegate {
 
     @IBOutlet weak var cellView: CellView!
     
@@ -19,21 +19,36 @@ class CellularAutomataViewController: UIViewController, DisplayLinkerDelegate {
     
     var elapsedFrameRate: CFTimeInterval = 0.0
     
-    var automata: SingleGenCellularAutomata? {
-        didSet {
-            cellView?.automata = automata
-        }
-    }
+    var automata: SingleGenCellularAutomata?
+       
     var ruleNumber: Int = 90
 
+    func cells() -> [Cell] {
+        if let automata = automata {
+            return automata.cells
+        } else {
+            return [Cell]()
+        }
+    }
+    
+    func currentRowIndex() -> Int {
+        if let automata = automata {
+            return automata.numGenerations
+        } else {
+            return 0
+        }
+    }
+    
     override func viewDidLoad() {
+        super.viewDidLoad()
         
         displayLinker = DisplayLinker(delegate: self)
         
-        automata = SingleGenCellularAutomata(numCells: cellView.cellsPerGen, ruleNumber: ruleNumber)
-        cellView.automata = automata
-
-        label.text = "Rule No: \(ruleNumber)"
+        automata = SingleGenCellularAutomata(numCells: cellView.cols, ruleNumber: ruleNumber)
+        
+        cellView.dataSource = self
+        
+   label.text = "Rule No: \(ruleNumber)"
         sliderLabel.text = "cell size \(cellView.cellSize)"
     }
 
@@ -45,7 +60,7 @@ class CellularAutomataViewController: UIViewController, DisplayLinkerDelegate {
             ruleNumber++
         }
         
-        automata = SingleGenCellularAutomata(numCells: cellView.cellsPerGen, ruleNumber: ruleNumber)
+        automata = SingleGenCellularAutomata(numCells: cellView.cols, ruleNumber: ruleNumber)
         
         label.text = "Rule No: \(ruleNumber) \(automata!.ruleSet!.rules)"
     }
@@ -57,7 +72,7 @@ class CellularAutomataViewController: UIViewController, DisplayLinkerDelegate {
             ruleNumber--
         }
         
-        automata = SingleGenCellularAutomata(numCells: cellView.cellsPerGen, ruleNumber: ruleNumber)
+        automata = SingleGenCellularAutomata(numCells: cellView.cols, ruleNumber: ruleNumber)
         
         label.text = "Rule No: \(ruleNumber) \(automata!.ruleSet!.rules)"
     }
@@ -66,10 +81,9 @@ class CellularAutomataViewController: UIViewController, DisplayLinkerDelegate {
         
         
         cellView.cellSize = Int(sender.value)
-        cellView.calcGenerations()
-        
-        automata = SingleGenCellularAutomata(numCells: cellView.cellsPerGen, ruleNumber: ruleNumber)
-        
+       
+        automata = SingleGenCellularAutomata(numCells: cellView.cols, ruleNumber: ruleNumber)
+
         sliderLabel.text = "cell size: \(cellView.cellSize)"
         
     }
@@ -78,7 +92,7 @@ class CellularAutomataViewController: UIViewController, DisplayLinkerDelegate {
     func generate(sender: UIButton) {
         ruleNumber = Int(arc4random_uniform(256))
 
-        automata = SingleGenCellularAutomata(numCells: cellView.cellsPerGen, ruleNumber: ruleNumber)
+        automata = SingleGenCellularAutomata(numCells: cellView.cols, ruleNumber: ruleNumber)
 
         label.text = "Rule No: \(ruleNumber) \(automata!.ruleSet!.rules)"
     }

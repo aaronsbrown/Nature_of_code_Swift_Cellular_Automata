@@ -20,6 +20,7 @@
 		12248B2B1B6DD49100B561B8 /* RuleSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12248B2A1B6DD49100B561B8 /* RuleSet.swift */; };
 		128ED2D71B70509200F78AF4 /* DisplayLinkerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128ED2D61B70509200F78AF4 /* DisplayLinkerDelegate.swift */; };
 		128ED2D91B70512E00F78AF4 /* DisplayLinker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128ED2D81B70512E00F78AF4 /* DisplayLinker.swift */; };
+		128ED2DD1B71C64300F78AF4 /* CellViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128ED2DC1B71C64300F78AF4 /* CellViewDataSource.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +51,7 @@
 		12248B2A1B6DD49100B561B8 /* RuleSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RuleSet.swift; sourceTree = "<group>"; };
 		128ED2D61B70509200F78AF4 /* DisplayLinkerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayLinkerDelegate.swift; sourceTree = "<group>"; };
 		128ED2D81B70512E00F78AF4 /* DisplayLinker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayLinker.swift; sourceTree = "<group>"; };
+		128ED2DC1B71C64300F78AF4 /* CellViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellViewDataSource.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +98,7 @@
 				128ED2D81B70512E00F78AF4 /* DisplayLinker.swift */,
 				12248B001B69DC4700B561B8 /* CellularAutomataViewController.swift */,
 				12248B221B6B2A8A00B561B8 /* CellView.swift */,
+				128ED2DC1B71C64300F78AF4 /* CellViewDataSource.swift */,
 				12248B281B6DC9C900B561B8 /* PushButtonView.swift */,
 				12248B021B69DC4700B561B8 /* Main.storyboard */,
 				12248B241B6D834C00B561B8 /* Cell.swift */,
@@ -241,6 +244,7 @@
 				128ED2D71B70509200F78AF4 /* DisplayLinkerDelegate.swift in Sources */,
 				12248AFF1B69DC4700B561B8 /* AppDelegate.swift in Sources */,
 				12248B291B6DC9C900B561B8 /* PushButtonView.swift in Sources */,
+				128ED2DD1B71C64300F78AF4 /* CellViewDataSource.swift in Sources */,
 				128ED2D91B70512E00F78AF4 /* DisplayLinker.swift in Sources */,
 				12248B251B6D834C00B561B8 /* Cell.swift in Sources */,
 			);
