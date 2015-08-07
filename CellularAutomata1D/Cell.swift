@@ -9,27 +9,28 @@
 class Cell {
     
     var value: Int
-    var prevValue: Int
+    var values = [Int]()
     
     init(value: Int) {
         self.value = value
-        self.prevValue = value
+//        values.append(value)
     }
     
     var isOn: Bool {
         get {
-            return value > 0
+            return values.last > 0
         }
     }
    
     var prevValueString: String {
         get {
-            return String(prevValue)
+            return String(values[values.count - 1])
         }
     }
     
+    
     func saveState() {
-        prevValue = value
+        values.append(value)
     }
 }
 

@@ -10,12 +10,12 @@ import UIKit
 
 class CellView: UIView {
 
-    var dataSource: CellViewDataSource?
+    weak var dataSource: CellViewDataSource?
 
     var cellSize: Int = 10 {
         didSet {
             calculateRowsAndCols()
-            setNeedsDisplay() // not doing much since generations not reset
+            setNeedsDisplay()
         }
     }
     
@@ -42,24 +42,29 @@ class CellView: UIView {
         let centeringOffset = (Int(bounds.width) - (cols * cellSize)) / 2
         
         // draw cellular automata
-        let cells = dataSource!.cells()
-        let currentRow = dataSource!.currentRowIndex()
+        let cells = dataSource?.cells(self) ?? [Cell]()
+        let currentRow = dataSource?.currentRowIndex(self) ?? 0
         
-        if currentRow <= rows {
-            for var col = 0; col < cols; col++ {
-                getFillColor(cells[col]).setFill()
-                CGContextAddRect(context,
-                    CGRect(x: cellSize * col + centeringOffset,
-                           y: currentRow * cellSize,
-                           width: cellSize,
-                           height: cellSize)
-                )
-                CGContextDrawPath(context, kCGPathFillStroke)
+        if currentRow <= rows && cells.first!.values.count > 0 {
+            
+            for var row = 0; row < currentRow; row++ {
+                for var col = 0; col < cols; col++ {
+                    if cells[col].values.count > row {
+                    getFillColor(cells[col].values[row]).setFill()
+                    CGContextAddRect(context,
+                        CGRect(x: cellSize * col + centeringOffset,
+                               y: row * cellSize,
+                               width: cellSize,
+                               height: cellSize)
+                    )
+                    CGContextDrawPath(context, kCGPathFillStroke)
+                    }
+                }
             }
         }
     }
   
-    func getFillColor(cell:Cell) -> UIColor {
-        return cell.isOn ? UIColor.darkGrayColor() : UIColor.whiteColor()
+    func getFillColor(value:Int) -> UIColor {
+        return value > 0 ? UIColor.darkGrayColor() : UIColor.whiteColor()
     }
 }

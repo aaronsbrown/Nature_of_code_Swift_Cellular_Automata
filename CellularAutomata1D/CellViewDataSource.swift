@@ -6,9 +6,9 @@
 //  Copyright (c) 2015 Aaron Brown. All rights reserved.
 //
 
-protocol CellViewDataSource {
+protocol CellViewDataSource: class {
     
-    func cells() -> [Cell]
-    func currentRowIndex() -> Int
+    func cells(sender: CellView) -> [Cell]?
+    func currentRowIndex(sender: CellView) -> Int?
     
 }

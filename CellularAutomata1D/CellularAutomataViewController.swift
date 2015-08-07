@@ -10,7 +10,11 @@ import UIKit
 
 class CellularAutomataViewController: UIViewController, CellViewDataSource, DisplayLinkerDelegate {
 
-    @IBOutlet weak var cellView: CellView!
+    @IBOutlet weak var cellView: CellView! {
+        didSet {
+            cellView.dataSource = self
+        }
+    }
     
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var sliderLabel: UILabel!
@@ -27,9 +31,9 @@ class CellularAutomataViewController: UIViewController, CellViewDataSource, Disp
         super.viewDidLoad()
         
         displayLinker = DisplayLinker(delegate: self)
-        automata = SingleGenCellularAutomata(numCells: cellView.cols, ruleNumber: ruleNumber)
-        
-        cellView.dataSource = self
+        automata = SingleGenCellularAutomata(numCells: cellView.cols, maxGenerations: cellView.rows, ruleNumber: ruleNumber)
+
+        automata?.breed(1)
         
         label.text = "Rule No: \(ruleNumber)"
         sliderLabel.text = "cell size \(cellView.cellSize)"
@@ -45,7 +49,12 @@ class CellularAutomataViewController: UIViewController, CellViewDataSource, Disp
             ruleNumber++
         }
         
-        automata = SingleGenCellularAutomata(numCells: cellView.cols, ruleNumber: ruleNumber)
+        automata = SingleGenCellularAutomata(numCells: cellView.cols, maxGenerations: cellView.cols, ruleNumber: ruleNumber)
+
+//        automata?.breed(cellView.rows)
+        cellView.setNeedsDisplay()
+
+
         
         label.text = "Rule No: \(ruleNumber) \(automata!.ruleSet!.rules)"
     }
@@ -57,8 +66,11 @@ class CellularAutomataViewController: UIViewController, CellViewDataSource, Disp
             ruleNumber--
         }
         
-        automata = SingleGenCellularAutomata(numCells: cellView.cols, ruleNumber: ruleNumber)
-        
+        automata = SingleGenCellularAutomata(numCells: cellView.cols, maxGenerations: cellView.cols, ruleNumber: ruleNumber)
+
+//        automata?.breed(cellView.rows)
+        cellView.setNeedsDisplay()
+
         label.text = "Rule No: \(ruleNumber) \(automata!.ruleSet!.rules)"
     }
     
@@ -67,7 +79,9 @@ class CellularAutomataViewController: UIViewController, CellViewDataSource, Disp
         
         cellView.cellSize = Int(sender.value)
        
-        automata = SingleGenCellularAutomata(numCells: cellView.cols, ruleNumber: ruleNumber)
+        automata = SingleGenCellularAutomata(numCells: cellView.cols, maxGenerations: cellView.cols, ruleNumber: ruleNumber)
+
+//        automata?.breed(cellView.rows)
 
         sliderLabel.text = "cell size: \(cellView.cellSize)"
         
@@ -76,14 +90,19 @@ class CellularAutomataViewController: UIViewController, CellViewDataSource, Disp
     @IBAction func generate(sender: UIButton) {
         ruleNumber = Int(arc4random_uniform(256))
 
-        automata = SingleGenCellularAutomata(numCells: cellView.cols, ruleNumber: ruleNumber)
+        automata = SingleGenCellularAutomata(numCells: cellView.cols, maxGenerations: cellView.cols, ruleNumber: ruleNumber)
+
+//        automata?.breed(cellView.rows)
+        cellView.setNeedsDisplay()
+
+        
 
         label.text = "Rule No: \(ruleNumber) \(automata!.ruleSet!.rules)"
     }
     
     
     // MARK: CellViewDataSource
-    func cells() -> [Cell] {
+    func cells(sender: CellView) -> [Cell]? {
         if let automata = automata {
             return automata.cells
         } else {
@@ -91,7 +110,7 @@ class CellularAutomataViewController: UIViewController, CellViewDataSource, Disp
         }
     }
     
-    func currentRowIndex() -> Int {
+    func currentRowIndex(sender: CellView) -> Int? {
         if let automata = automata {
             return automata.numGenerations
         } else {
@@ -101,13 +120,16 @@ class CellularAutomataViewController: UIViewController, CellViewDataSource, Disp
     
 
     // MARK: DisplayLinkerDelegate
+    var numDrawn = 0
     func updateDisplay(deltaTime: CFTimeInterval) {
         
         elapsedFrameRate += deltaTime
-        if elapsedFrameRate > 1/30 {
-            cellView.setNeedsDisplay()
+        if numDrawn < automata?.maxGenerations && elapsedFrameRate > 1/60  {
             automata?.breed()
+            cellView.setNeedsDisplay()
+            
             elapsedFrameRate = 0
+            numDrawn = currentRowIndex(cellView)!
         }
     }
 
