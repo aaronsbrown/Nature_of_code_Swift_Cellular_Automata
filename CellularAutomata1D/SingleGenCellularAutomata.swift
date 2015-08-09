@@ -12,7 +12,7 @@ class SingleGenCellularAutomata {
     var ruleSet: RuleSet!
     
     var cells = [Cell]()
-    var numGenerations = 0
+    var numGenerationsBred = 0
    
     init(numCells: Int, ruleNumber: Int) {
         
@@ -53,7 +53,7 @@ class SingleGenCellularAutomata {
             cell.value = calculateCellState(cells[prevIndex], current: cell, next: cells[nextIndex])
         }
         
-        numGenerations++
+        numGenerationsBred++
     }
     
     

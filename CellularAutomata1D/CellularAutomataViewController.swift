@@ -43,7 +43,7 @@ class CellularAutomataViewController: AnimationViewController, CellViewDataSourc
         super.drawFrame(timeSinceLastDisplayUpdate)
         if numCellsDrawn < maxGenerationsToDraw {
             automata.breed()
-            numCellsDrawn = automata.numGenerations
+            numCellsDrawn = automata.numGenerationsBred
             cellView.setNeedsDisplay()
         }
     
@@ -90,7 +90,7 @@ class CellularAutomataViewController: AnimationViewController, CellViewDataSourc
     }
     
     func currentRowIndex(sender: CellView) -> Int {
-        return automata.numGenerations
+        return automata.numGenerationsBred
     }
 }
 
