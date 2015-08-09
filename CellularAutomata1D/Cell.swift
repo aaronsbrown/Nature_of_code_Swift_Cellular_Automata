@@ -13,21 +13,15 @@ class Cell {
     
     init(value: Int) {
         self.value = value
-//        values.append(value)
     }
     
     var isOn: Bool {
-        get {
-            return values.last > 0
-        }
+        get { return values.last > 0 }
     }
    
     var prevValueString: String {
-        get {
-            return String(values[values.count - 1])
-        }
+        get { return String(values[values.count - 1]) }
     }
-    
     
     func saveState() {
         values.append(value)
