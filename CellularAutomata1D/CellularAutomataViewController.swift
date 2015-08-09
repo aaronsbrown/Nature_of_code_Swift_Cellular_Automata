@@ -26,6 +26,7 @@ class CellularAutomataViewController: AnimationViewController, CellViewDataSourc
     var automata: SingleGenCellularAutomata!
     var ruleNumber: Int = 90
     var numCellsDrawn = 0
+    var maxGenerationsToDraw = 0
     
   
     // MARK: Controller
@@ -40,7 +41,7 @@ class CellularAutomataViewController: AnimationViewController, CellViewDataSourc
 
    override func drawFrame(timeSinceLastDisplayUpdate: CFTimeInterval) {
         super.drawFrame(timeSinceLastDisplayUpdate)
-        if numCellsDrawn < automata.maxGenerations {
+        if numCellsDrawn < maxGenerationsToDraw {
             automata.breed()
             numCellsDrawn = automata.numGenerations
             cellView.setNeedsDisplay()
@@ -50,7 +51,8 @@ class CellularAutomataViewController: AnimationViewController, CellViewDataSourc
     
     private func initAnimation(ruleNumber:Int) {
         numCellsDrawn = 0
-        automata = SingleGenCellularAutomata(numCells: cellView.cols, maxGenerations: cellView.rows, ruleNumber: ruleNumber)
+        maxGenerationsToDraw = cellView.rows
+        automata = SingleGenCellularAutomata(numCells: cellView.cols, ruleNumber: ruleNumber)
     }
     
     @IBAction func pause(sender: AnyObject) {
