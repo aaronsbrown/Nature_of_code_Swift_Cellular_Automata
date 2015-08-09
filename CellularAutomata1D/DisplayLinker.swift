@@ -27,6 +27,7 @@ class DisplayLinker: NSObject {
     func ensureDisplayLinkIsOnRunLoop() {
         if displayLink == nil {
             displayLink = CADisplayLink(target: self, selector: Selector("displayLinkUpdated"))
+            displayLink?.paused = true
             displayLink?.addToRunLoop(NSRunLoop.mainRunLoop(), forMode: NSRunLoopCommonModes)
             nextDeltaTimeZero = true
         }
@@ -49,5 +50,13 @@ class DisplayLinker: NSObject {
             
             delegate.updateDisplay(deltaTime)
         }
+    }
+    
+    func stop() {
+        self.displayLink?.paused = true
+    }
+    
+    func start() {
+       self.displayLink?.paused = false
     }
 }

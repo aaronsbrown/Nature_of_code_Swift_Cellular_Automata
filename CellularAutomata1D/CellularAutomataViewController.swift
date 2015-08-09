@@ -132,6 +132,17 @@ class CellularAutomataViewController: UIViewController, CellViewDataSource, Disp
             numDrawn = currentRowIndex(cellView)!
         }
     }
+    
+    
+    @IBAction func pause(sender: AnyObject) {
+        println("stopping")
+        displayLinker?.stop()
+    }
+
+    @IBAction func start(sender: AnyObject) {
+        println("starting")
+        displayLinker?.start()
+    }
 
 }
 

@@ -72,6 +72,75 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1222D49F1B76DD1A00E132F7 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				12248B001B69DC4700B561B8 /* CellularAutomataViewController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		1222D4A01B76DD2200E132F7 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				12248AFE1B69DC4700B561B8 /* AppDelegate.swift */,
+			);
+			name = Other;
+			sourceTree = "<group>";
+		};
+		1222D4A11B76DD3000E132F7 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				12248B261B6D869B00B561B8 /* SingleGenCellularAutomata.swift */,
+				12248B2A1B6DD49100B561B8 /* RuleSet.swift */,
+				12248B241B6D834C00B561B8 /* Cell.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		1222D4A21B76DD3900E132F7 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				12248B051B69DC4700B561B8 /* Images.xcassets */,
+			);
+			name = Assets;
+			sourceTree = "<group>";
+		};
+		1222D4A31B76DD5700E132F7 /* Storyboards & Nibs */ = {
+			isa = PBXGroup;
+			children = (
+				12248B071B69DC4700B561B8 /* LaunchScreen.xib */,
+				12248B021B69DC4700B561B8 /* Main.storyboard */,
+			);
+			name = "Storyboards & Nibs";
+			sourceTree = "<group>";
+		};
+		1222D4A41B76DD6C00E132F7 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				12248B281B6DC9C900B561B8 /* PushButtonView.swift */,
+				12248B221B6B2A8A00B561B8 /* CellView.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		1222D4A51B76DD7D00E132F7 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				128ED2D61B70509200F78AF4 /* DisplayLinkerDelegate.swift */,
+				128ED2D81B70512E00F78AF4 /* DisplayLinker.swift */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
+		1222D4A61B76DDFA00E132F7 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				128ED2DC1B71C64300F78AF4 /* CellViewDataSource.swift */,
+			);
+			name = Protocols;
+			sourceTree = "<group>";
+		};
 		12248AF01B69DC4700B561B8 = {
 			isa = PBXGroup;
 			children = (
@@ -93,19 +162,14 @@
 		12248AFB1B69DC4700B561B8 /* CellularAutomata1D */ = {
 			isa = PBXGroup;
 			children = (
-				12248AFE1B69DC4700B561B8 /* AppDelegate.swift */,
-				128ED2D61B70509200F78AF4 /* DisplayLinkerDelegate.swift */,
-				128ED2D81B70512E00F78AF4 /* DisplayLinker.swift */,
-				12248B001B69DC4700B561B8 /* CellularAutomataViewController.swift */,
-				12248B221B6B2A8A00B561B8 /* CellView.swift */,
-				128ED2DC1B71C64300F78AF4 /* CellViewDataSource.swift */,
-				12248B281B6DC9C900B561B8 /* PushButtonView.swift */,
-				12248B021B69DC4700B561B8 /* Main.storyboard */,
-				12248B241B6D834C00B561B8 /* Cell.swift */,
-				12248B261B6D869B00B561B8 /* SingleGenCellularAutomata.swift */,
-				12248B2A1B6DD49100B561B8 /* RuleSet.swift */,
-				12248B051B69DC4700B561B8 /* Images.xcassets */,
-				12248B071B69DC4700B561B8 /* LaunchScreen.xib */,
+				1222D4A61B76DDFA00E132F7 /* Protocols */,
+				1222D4A21B76DD3900E132F7 /* Assets */,
+				1222D49F1B76DD1A00E132F7 /* Controllers */,
+				1222D4A51B76DD7D00E132F7 /* Helpers */,
+				1222D4A11B76DD3000E132F7 /* Models */,
+				1222D4A01B76DD2200E132F7 /* Other */,
+				1222D4A31B76DD5700E132F7 /* Storyboards & Nibs */,
+				1222D4A41B76DD6C00E132F7 /* Views */,
 				12248AFC1B69DC4700B561B8 /* Supporting Files */,
 			);
 			path = CellularAutomata1D;
