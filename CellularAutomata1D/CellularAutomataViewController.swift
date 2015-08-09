@@ -8,73 +8,87 @@
 
 import UIKit
 
-class CellularAutomataViewController: UIViewController {
+class CellularAutomataViewController: AnimationViewController, CellViewDataSource {
 
-    @IBOutlet weak var cellView: CellView!
+    // MARK: UI
     
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var sliderLabel: UILabel!
-    
-    var automata: SingleGenCellularAutomata? {
+
+    @IBOutlet weak var cellView: CellView! {
         didSet {
-            cellView?.automata = automata
+            cellView.dataSource = self
         }
     }
-    var ruleNumber: Int = 1
-
+    
+    // MARK: Model
+    
+    var automata: SingleGenCellularAutomata!
+    var ruleNumber: Int = 90
+    var numCellsDrawn = 0
+    
+  
+    // MARK: Controller
+    
     override func viewDidLoad() {
-        automata = SingleGenCellularAutomata(numCells: cellView.cellsPerGen, ruleNumber: 0)
-        cellView.automata = automata
-
+        super.viewDidLoad()
+        
         label.text = "Rule No: \(ruleNumber)"
         sliderLabel.text = "cell size \(cellView.cellSize)"
+        initAnimation(ruleNumber)
     }
 
-    @IBAction
-    func incrementRule(sender: PushButtonView) {
-        if ruleNumber >= automata?.ruleSet.maxRuleNum { 
-            ruleNumber = 0
-        } else {
-            ruleNumber++
+   override func drawFrame(timeSinceLastDisplayUpdate: CFTimeInterval) {
+        super.drawFrame(timeSinceLastDisplayUpdate)
+        if numCellsDrawn < automata.maxGenerations {
+            automata.breed()
+            numCellsDrawn = automata.numGenerations
+            cellView.setNeedsDisplay()
         }
-        
-        automata = SingleGenCellularAutomata(numCells: cellView.cellsPerGen, ruleNumber: ruleNumber)
-        
-        label.text = "Rule No: \(ruleNumber) \(automata!.ruleSet!.rules)"
+    
+    }
+    
+    private func initAnimation(ruleNumber:Int) {
+        numCellsDrawn = 0
+        automata = SingleGenCellularAutomata(numCells: cellView.cols, maxGenerations: cellView.rows, ruleNumber: ruleNumber)
+    }
+    
+    @IBAction func pause(sender: AnyObject) {
+        super.pauseAnimation()
+    }
+    
+    @IBAction func incrementRule(sender: PushButtonView) {
+        ruleNumber = automata.ruleSet.nextRuleNum(ruleNumber)
+        label.text = "Rule No: \(ruleNumber) \(automata.ruleSet.rules)"
+        initAnimation(ruleNumber)
     }
     
     @IBAction func decrementRule(sender: PushButtonView) {
-        if ruleNumber <= 0 {
-            ruleNumber = automata!.ruleSet.maxRuleNum
-        } else {
-            ruleNumber--
-        }
-        
-        automata = SingleGenCellularAutomata(numCells: cellView.cellsPerGen, ruleNumber: ruleNumber)
-        
-        label.text = "Rule No: \(ruleNumber) \(automata!.ruleSet!.rules)"
+        ruleNumber = automata.ruleSet.prevRuleNum(ruleNumber)
+        label.text = "Rule No: \(ruleNumber) \(automata!.ruleSet.rules)"
+        initAnimation(ruleNumber)
+    }
+    
+    @IBAction func randomRuleSet(sender: UIButton) {
+        ruleNumber = automata.ruleSet!.randomRuleNum()
+        label.text = "Rule No: \(ruleNumber) \(automata.ruleSet.rules)"
+        initAnimation(ruleNumber)
     }
     
     @IBAction func updateCellSize(sender: UISlider) {
-        
-        
         cellView.cellSize = Int(sender.value)
-        cellView.calcGenerations()
-        
-        automata = SingleGenCellularAutomata(numCells: cellView.cellsPerGen, ruleNumber: ruleNumber)
-        
         sliderLabel.text = "cell size: \(cellView.cellSize)"
-        
+        initAnimation(ruleNumber)
     }
     
-    @IBAction
-    func generate(sender: UIButton) {
-        ruleNumber = Int(arc4random_uniform(256))
-
-        automata = SingleGenCellularAutomata(numCells: cellView.cellsPerGen, ruleNumber: ruleNumber)
-
-        label.text = "Rule No: \(ruleNumber) \(automata!.ruleSet!.rules)"
+    // MARK: CellViewDataSource
+    
+    func cells(sender: CellView) -> [Cell] {
+        return automata.cells
     }
-
+    
+    func currentRowIndex(sender: CellView) -> Int {
+        return automata.numGenerations
+    }
 }
 

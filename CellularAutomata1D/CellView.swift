@@ -8,57 +8,68 @@
 
 import UIKit
 
-//@IBDesignable
 class CellView: UIView {
 
-    
-    var automata: SingleGenCellularAutomata? {
-        didSet {
-           setNeedsDisplay()
-        }
+    weak var dataSource: CellViewDataSource?
+
+    var cellSize: Int = 10 {
+        didSet { calculateRowsAndCols() }
     }
-    var cellSize: Int = 10
     
-    var maxGens: Int!
-    var cellsPerGen: Int!
+    var rows: Int!
+    var cols: Int!
+    
+    func calculateRowsAndCols() {
+        rows = Int(bounds.height) / cellSize
+        cols = Int(bounds.width) / cellSize
+    }
     
     override func willMoveToSuperview(newSuperview: UIView?) {
-        calcGenerations()
-    }
-    
-    func calcGenerations() {
-        maxGens = Int(bounds.height) / cellSize
-        cellsPerGen = Int(bounds.width) / cellSize
+        calculateRowsAndCols()
     }
     
     override func drawRect(rect: CGRect) {
+
         // set up graphics context
         var context = UIGraphicsGetCurrentContext()
         UIColor.darkGrayColor().setStroke()
+        UIColor.darkGrayColor().setFill()
         CGContextSetLineWidth(context, 0.05)
 
         // calculate offset for centering graphics
-        let centeringOffset = (Int(bounds.width) - (cellsPerGen * cellSize)) / 2
+        let centeringOffset = (Int(bounds.width) - (cols * cellSize)) / 2
         
+        // drawGrid
+        for var row = 0; row < rows; row++ {
+            for var col = 0; col < cols; col++ {
+                CGContextAddRect(context,
+                    CGRect(
+                        x: cellSize * col + centeringOffset,
+                        y: row * cellSize,
+                        width: cellSize,
+                        height: cellSize))
+                CGContextDrawPath(context, kCGPathStroke)
+            }
+        }
+       
         // draw cellular automata
-        if let automata = automata {
-            for var generation = 0; generation < maxGens; generation++ {
-                for var cellIndex = 0; cellIndex < automata.cells.count; cellIndex++ {
-                    getFillColor(automata.cells[cellIndex]).setFill()
+        let cells = dataSource?.cells(self) ?? [Cell]()
+        let numRowsToDraw = dataSource?.currentRowIndex(self) ?? 0
+        
+        for var row = 0; row < numRowsToDraw; row++ {
+            for var col = 0; col < cols; col++ {
+                let cellValue = cells[col].values[row]
+                if cellValue > 0 {
                     CGContextAddRect(context,
-                        CGRect(x: cellSize * cellIndex + centeringOffset,
-                               y: automata.numGenerations * cellSize,
-                               width: cellSize,
-                               height: cellSize)
+                        CGRect(
+                            x: cellSize * col + centeringOffset,
+                            y: row * cellSize,
+                            width: cellSize,
+                            height: cellSize)
                     )
                     CGContextDrawPath(context, kCGPathFillStroke)
                 }
-                automata.breed()
             }
         }
-    }
-  
-    func getFillColor(cell:Cell) -> UIColor {
-        return cell.isOn ? UIColor.darkGrayColor() : UIColor.whiteColor()
     }
 }

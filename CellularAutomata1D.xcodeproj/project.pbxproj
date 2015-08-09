@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1222D4A81B76DE7400E132F7 /* AnimationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1222D4A71B76DE7400E132F7 /* AnimationViewController.swift */; };
 		12248AFF1B69DC4700B561B8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12248AFE1B69DC4700B561B8 /* AppDelegate.swift */; };
 		12248B011B69DC4700B561B8 /* CellularAutomataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12248B001B69DC4700B561B8 /* CellularAutomataViewController.swift */; };
 		12248B041B69DC4700B561B8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12248B021B69DC4700B561B8 /* Main.storyboard */; };
@@ -18,6 +19,7 @@
 		12248B271B6D869B00B561B8 /* SingleGenCellularAutomata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12248B261B6D869B00B561B8 /* SingleGenCellularAutomata.swift */; };
 		12248B291B6DC9C900B561B8 /* PushButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12248B281B6DC9C900B561B8 /* PushButtonView.swift */; };
 		12248B2B1B6DD49100B561B8 /* RuleSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12248B2A1B6DD49100B561B8 /* RuleSet.swift */; };
+		128ED2DD1B71C64300F78AF4 /* CellViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128ED2DC1B71C64300F78AF4 /* CellViewDataSource.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,6 +33,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1222D4A71B76DE7400E132F7 /* AnimationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationViewController.swift; sourceTree = "<group>"; };
 		12248AF91B69DC4700B561B8 /* CellularAutomata1D.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CellularAutomata1D.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		12248AFD1B69DC4700B561B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		12248AFE1B69DC4700B561B8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -46,6 +49,7 @@
 		12248B261B6D869B00B561B8 /* SingleGenCellularAutomata.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleGenCellularAutomata.swift; sourceTree = "<group>"; };
 		12248B281B6DC9C900B561B8 /* PushButtonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushButtonView.swift; sourceTree = "<group>"; };
 		12248B2A1B6DD49100B561B8 /* RuleSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RuleSet.swift; sourceTree = "<group>"; };
+		128ED2DC1B71C64300F78AF4 /* CellViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellViewDataSource.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +70,74 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1222D49F1B76DD1A00E132F7 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				12248B001B69DC4700B561B8 /* CellularAutomataViewController.swift */,
+				1222D4A71B76DE7400E132F7 /* AnimationViewController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		1222D4A01B76DD2200E132F7 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				12248AFE1B69DC4700B561B8 /* AppDelegate.swift */,
+			);
+			name = Other;
+			sourceTree = "<group>";
+		};
+		1222D4A11B76DD3000E132F7 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				12248B261B6D869B00B561B8 /* SingleGenCellularAutomata.swift */,
+				12248B2A1B6DD49100B561B8 /* RuleSet.swift */,
+				12248B241B6D834C00B561B8 /* Cell.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		1222D4A21B76DD3900E132F7 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				12248B051B69DC4700B561B8 /* Images.xcassets */,
+			);
+			name = Assets;
+			sourceTree = "<group>";
+		};
+		1222D4A31B76DD5700E132F7 /* Storyboards & Nibs */ = {
+			isa = PBXGroup;
+			children = (
+				12248B071B69DC4700B561B8 /* LaunchScreen.xib */,
+				12248B021B69DC4700B561B8 /* Main.storyboard */,
+			);
+			name = "Storyboards & Nibs";
+			sourceTree = "<group>";
+		};
+		1222D4A41B76DD6C00E132F7 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				12248B281B6DC9C900B561B8 /* PushButtonView.swift */,
+				12248B221B6B2A8A00B561B8 /* CellView.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		1222D4A51B76DD7D00E132F7 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
+		1222D4A61B76DDFA00E132F7 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				128ED2DC1B71C64300F78AF4 /* CellViewDataSource.swift */,
+			);
+			name = Protocols;
+			sourceTree = "<group>";
+		};
 		12248AF01B69DC4700B561B8 = {
 			isa = PBXGroup;
 			children = (
@@ -87,16 +159,14 @@
 		12248AFB1B69DC4700B561B8 /* CellularAutomata1D */ = {
 			isa = PBXGroup;
 			children = (
-				12248AFE1B69DC4700B561B8 /* AppDelegate.swift */,
-				12248B001B69DC4700B561B8 /* CellularAutomataViewController.swift */,
-				12248B221B6B2A8A00B561B8 /* CellView.swift */,
-				12248B281B6DC9C900B561B8 /* PushButtonView.swift */,
-				12248B021B69DC4700B561B8 /* Main.storyboard */,
-				12248B241B6D834C00B561B8 /* Cell.swift */,
-				12248B261B6D869B00B561B8 /* SingleGenCellularAutomata.swift */,
-				12248B2A1B6DD49100B561B8 /* RuleSet.swift */,
-				12248B051B69DC4700B561B8 /* Images.xcassets */,
-				12248B071B69DC4700B561B8 /* LaunchScreen.xib */,
+				1222D4A21B76DD3900E132F7 /* Assets */,
+				1222D49F1B76DD1A00E132F7 /* Controllers */,
+				1222D4A51B76DD7D00E132F7 /* Helpers */,
+				1222D4A11B76DD3000E132F7 /* Models */,
+				1222D4A01B76DD2200E132F7 /* Other */,
+				1222D4A61B76DDFA00E132F7 /* Protocols */,
+				1222D4A31B76DD5700E132F7 /* Storyboards & Nibs */,
+				1222D4A41B76DD6C00E132F7 /* Views */,
 				12248AFC1B69DC4700B561B8 /* Supporting Files */,
 			);
 			path = CellularAutomata1D;
@@ -232,8 +302,10 @@
 				12248B2B1B6DD49100B561B8 /* RuleSet.swift in Sources */,
 				12248B271B6D869B00B561B8 /* SingleGenCellularAutomata.swift in Sources */,
 				12248B231B6B2A8A00B561B8 /* CellView.swift in Sources */,
+				1222D4A81B76DE7400E132F7 /* AnimationViewController.swift in Sources */,
 				12248AFF1B69DC4700B561B8 /* AppDelegate.swift in Sources */,
 				12248B291B6DC9C900B561B8 /* PushButtonView.swift in Sources */,
+				128ED2DD1B71C64300F78AF4 /* CellViewDataSource.swift in Sources */,
 				12248B251B6D834C00B561B8 /* Cell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

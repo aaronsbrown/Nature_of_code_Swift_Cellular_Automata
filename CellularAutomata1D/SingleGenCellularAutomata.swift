@@ -13,25 +13,32 @@ class SingleGenCellularAutomata {
     
     var cells = [Cell]()
     var numGenerations = 0
+    var maxGenerations = 0
 
-    init(numCells: Int, ruleNumber: Int) {
+    init(numCells: Int, maxGenerations: Int, ruleNumber: Int) {
         
         for i in 0 ..< numCells {
             cells.append(Cell(value: 0))
         }
         cells[cells.count / 2] = Cell(value: 1)
+        self.maxGenerations = maxGenerations
         
         ruleSet = RuleSet.forRuleNumber(ruleNumber)
+        
+        breed(1)
     }
     
-    convenience init(numCells: Int) {
-        self.init(numCells: numCells, ruleNumber: 0)
+    convenience init(numCells: Int, maxGenerations: Int) {
+        self.init(numCells: numCells, maxGenerations: maxGenerations, ruleNumber: 0)
     }
     
-    func randomize() {
-        ruleSet = RuleSet.random()
-    }
     
+    func breed(numGenerations: Int) {
+        for i in 0 ..< numGenerations {
+          self.breed()
+        }
+
+    }
     
     func breed() {
         
@@ -50,6 +57,7 @@ class SingleGenCellularAutomata {
         
         numGenerations++
     }
+    
     
     func calculateCellState(prev: Cell, current: Cell, next: Cell) -> Int {
         let binaryString = prev.prevValueString + current.prevValueString + next.prevValueString

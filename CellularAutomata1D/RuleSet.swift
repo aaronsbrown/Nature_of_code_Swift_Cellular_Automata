@@ -23,6 +23,22 @@ struct RuleSet {
         get { return Int(pow(Double(numStates), Double(numRules))) - 1 }
     }
     
+    var minRuleNum: Int {
+        get { return 0 }
+    }
+    
+    func nextRuleNum(var currentRuleNum: Int) -> Int {
+        return currentRuleNum >= maxRuleNum ? minRuleNum : ++currentRuleNum
+    }
+    
+    func prevRuleNum(var currentRuleNum: Int) -> Int {
+        return currentRuleNum <= minRuleNum ? maxRuleNum : --currentRuleNum
+    }
+    
+    func randomRuleNum() -> Int {
+        return Int(arc4random_uniform(UInt32(maxRuleNum)))
+    }
+    
     /**
      * Returns a string representation of base-10 Rule Number for this RuleSet
      */
@@ -58,13 +74,14 @@ struct RuleSet {
     /**
      * Returns a RuleSet for a random ruleNumber
      */
-    static func random() -> RuleSet {
+    static func randomRuleSet() -> RuleSet {
         var ruleSet = RuleSet()
         for var i = 0; i < ruleSet.numRules; i++ {
             ruleSet.rules.append( Int(arc4random_uniform(2)) )
         }
         return ruleSet
     }
+    
     
 }
 
