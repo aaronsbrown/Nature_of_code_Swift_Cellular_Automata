@@ -15,7 +15,6 @@ class CellView: UIView {
     var cellSize: Int = 10 {
         didSet {
             calculateRowsAndCols()
-            setNeedsDisplay()
         }
     }
     

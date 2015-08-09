@@ -24,14 +24,12 @@ class SingleGenCellularAutomata {
         self.maxGenerations = maxGenerations
         
         ruleSet = RuleSet.forRuleNumber(ruleNumber)
+        
+        breed(1)
     }
     
     convenience init(numCells: Int, maxGenerations: Int) {
         self.init(numCells: numCells, maxGenerations: maxGenerations, ruleNumber: 0)
-    }
-    
-    func randomRuleSet() {
-        ruleSet = RuleSet.random()
     }
     
     

@@ -8,7 +8,12 @@
 
 import UIKit
 
-class CellularAutomataViewController: UIViewController, CellViewDataSource, DisplayLinkerDelegate {
+class CellularAutomataViewController: AnimationViewController, CellViewDataSource {
+
+    // MARK: UI
+    
+    @IBOutlet weak var label: UILabel!
+    @IBOutlet weak var sliderLabel: UILabel!
 
     @IBOutlet weak var cellView: CellView! {
         didSet {
@@ -16,133 +21,74 @@ class CellularAutomataViewController: UIViewController, CellViewDataSource, Disp
         }
     }
     
-    @IBOutlet weak var label: UILabel!
-    @IBOutlet weak var sliderLabel: UILabel!
+    // MARK: Model
     
-    var displayLinker: DisplayLinker?
-    var elapsedFrameRate: CFTimeInterval = 0.0
-    
-    var automata: SingleGenCellularAutomata?
+    var automata: SingleGenCellularAutomata!
     var ruleNumber: Int = 90
-
+    var numCellsDrawn = 0
     
-    // MARK: initialize
+  
+    // MARK: Controller
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        displayLinker = DisplayLinker(delegate: self)
-        automata = SingleGenCellularAutomata(numCells: cellView.cols, maxGenerations: cellView.rows, ruleNumber: ruleNumber)
-
-        automata?.breed(1)
-        
         label.text = "Rule No: \(ruleNumber)"
         sliderLabel.text = "cell size \(cellView.cellSize)"
+        initAnimation(ruleNumber)
     }
 
-    
-    // MARK: User Interaction
-    @IBAction
-    func incrementRule(sender: PushButtonView) {
-        if ruleNumber >= automata?.ruleSet.maxRuleNum { 
-            ruleNumber = 0
-        } else {
-            ruleNumber++
+   override func drawFrame(timeSinceLastDisplayUpdate: CFTimeInterval) {
+        super.drawFrame(timeSinceLastDisplayUpdate)
+        if numCellsDrawn < automata.maxGenerations {
+            automata.breed()
+            numCellsDrawn = automata.numGenerations
+            cellView.setNeedsDisplay()
         }
-        
-        automata = SingleGenCellularAutomata(numCells: cellView.cols, maxGenerations: cellView.cols, ruleNumber: ruleNumber)
-
-//        automata?.breed(cellView.rows)
-        cellView.setNeedsDisplay()
-
-
-        
-        label.text = "Rule No: \(ruleNumber) \(automata!.ruleSet!.rules)"
+    
+    }
+    
+    private func initAnimation(ruleNumber:Int) {
+        numCellsDrawn = 0
+        automata = SingleGenCellularAutomata(numCells: cellView.cols, maxGenerations: cellView.rows, ruleNumber: ruleNumber)
+    }
+    
+    @IBAction func pause(sender: AnyObject) {
+        super.pauseAnimation()
+    }
+    
+    @IBAction func incrementRule(sender: PushButtonView) {
+        ruleNumber = automata.ruleSet.nextRuleNum(ruleNumber)
+        label.text = "Rule No: \(ruleNumber) \(automata.ruleSet.rules)"
+        initAnimation(ruleNumber)
     }
     
     @IBAction func decrementRule(sender: PushButtonView) {
-        if ruleNumber <= 0 {
-            ruleNumber = automata!.ruleSet.maxRuleNum
-        } else {
-            ruleNumber--
-        }
-        
-        automata = SingleGenCellularAutomata(numCells: cellView.cols, maxGenerations: cellView.cols, ruleNumber: ruleNumber)
-
-//        automata?.breed(cellView.rows)
-        cellView.setNeedsDisplay()
-
-        label.text = "Rule No: \(ruleNumber) \(automata!.ruleSet!.rules)"
+        ruleNumber = automata.ruleSet.prevRuleNum(ruleNumber)
+        label.text = "Rule No: \(ruleNumber) \(automata!.ruleSet.rules)"
+        initAnimation(ruleNumber)
+    }
+    
+    @IBAction func randomRuleSet(sender: UIButton) {
+        ruleNumber = automata.ruleSet!.randomRuleNum()
+        label.text = "Rule No: \(ruleNumber) \(automata.ruleSet.rules)"
+        initAnimation(ruleNumber)
     }
     
     @IBAction func updateCellSize(sender: UISlider) {
-        
-        
         cellView.cellSize = Int(sender.value)
-       
-        automata = SingleGenCellularAutomata(numCells: cellView.cols, maxGenerations: cellView.cols, ruleNumber: ruleNumber)
-
-//        automata?.breed(cellView.rows)
-
         sliderLabel.text = "cell size: \(cellView.cellSize)"
-        
+        initAnimation(ruleNumber)
     }
-    
-    @IBAction func generate(sender: UIButton) {
-        ruleNumber = Int(arc4random_uniform(256))
-
-        automata = SingleGenCellularAutomata(numCells: cellView.cols, maxGenerations: cellView.cols, ruleNumber: ruleNumber)
-
-//        automata?.breed(cellView.rows)
-        cellView.setNeedsDisplay()
-
-        
-
-        label.text = "Rule No: \(ruleNumber) \(automata!.ruleSet!.rules)"
-    }
-    
     
     // MARK: CellViewDataSource
-    func cells(sender: CellView) -> [Cell]? {
-        if let automata = automata {
-            return automata.cells
-        } else {
-            return [Cell]()
-        }
+    
+    func cells(sender: CellView) -> [Cell] {
+        return automata.cells
     }
     
-    func currentRowIndex(sender: CellView) -> Int? {
-        if let automata = automata {
-            return automata.numGenerations
-        } else {
-            return 0
-        }
+    func currentRowIndex(sender: CellView) -> Int {
+        return automata.numGenerations
     }
-    
-
-    // MARK: DisplayLinkerDelegate
-    var numDrawn = 0
-    func updateDisplay(deltaTime: CFTimeInterval) {
-        
-        elapsedFrameRate += deltaTime
-        if numDrawn < automata?.maxGenerations && elapsedFrameRate > 1/60  {
-            automata?.breed()
-            cellView.setNeedsDisplay()
-            
-            elapsedFrameRate = 0
-            numDrawn = currentRowIndex(cellView)!
-        }
-    }
-    
-    
-    @IBAction func pause(sender: AnyObject) {
-        println("stopping")
-        displayLinker?.stop()
-    }
-
-    @IBAction func start(sender: AnyObject) {
-        println("starting")
-        displayLinker?.start()
-    }
-
 }
 

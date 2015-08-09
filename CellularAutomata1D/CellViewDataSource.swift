@@ -8,7 +8,7 @@
 
 protocol CellViewDataSource: class {
     
-    func cells(sender: CellView) -> [Cell]?
-    func currentRowIndex(sender: CellView) -> Int?
+    func cells(sender: CellView) -> [Cell]
+    func currentRowIndex(sender: CellView) -> Int
     
 }
