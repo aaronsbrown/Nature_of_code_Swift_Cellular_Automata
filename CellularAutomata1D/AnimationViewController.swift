@@ -10,22 +10,20 @@ import UIKit
 
 class AnimationViewController: UIViewController {
 
-    let drawTimeInterval:CFTimeInterval = 1/30
+    let drawTimeInterval:CFTimeInterval = 1/45
     
     var displayLink: CADisplayLink!
     var prevTimestamp: CFTimeInterval = 0
     var timeSinceLastDisplayUpdate: CFTimeInterval = 0
     var timeSinceLastFrameDraw: CFTimeInterval = 0.0
 
-    var animationRunning:Bool!
+    var animationRunning:Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         displayLink = CADisplayLink(target: self, selector: "updateDisplayLink:")
         displayLink.addToRunLoop(NSRunLoop.mainRunLoop(), forMode: NSRunLoopCommonModes)
-        
-        animationRunning = true
     }
     
     func updateDisplayLink(sender: CADisplayLink) {
@@ -52,6 +50,14 @@ class AnimationViewController: UIViewController {
     }
     
     func pauseAnimation() {
-        displayLink.paused = !displayLink.paused
+        animationRunning = false
+    }
+    
+    func startAnimation() {
+        animationRunning = true
+    }
+    
+    func toggleAnimation() {
+        animationRunning = !animationRunning
     }
 }

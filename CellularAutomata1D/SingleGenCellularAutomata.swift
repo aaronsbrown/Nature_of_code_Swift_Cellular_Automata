@@ -22,8 +22,6 @@ class SingleGenCellularAutomata {
         cells[cells.count / 2] = Cell(value: 1)
         
         ruleSet = RuleSet.forRuleNumber(ruleNumber)
-        
-        breed(1)
     }
     
     convenience init(numCells: Int) {

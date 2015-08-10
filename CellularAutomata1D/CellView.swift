@@ -29,7 +29,7 @@ class CellView: UIView {
     }
     
     override func drawRect(rect: CGRect) {
-
+        
         // set up graphics context
         var context = UIGraphicsGetCurrentContext()
         UIColor.darkGrayColor().setStroke()
