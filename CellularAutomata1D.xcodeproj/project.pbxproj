@@ -19,6 +19,8 @@
 		12248B271B6D869B00B561B8 /* SingleGenCellularAutomata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12248B261B6D869B00B561B8 /* SingleGenCellularAutomata.swift */; };
 		12248B291B6DC9C900B561B8 /* PushButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12248B281B6DC9C900B561B8 /* PushButtonView.swift */; };
 		12248B2B1B6DD49100B561B8 /* RuleSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12248B2A1B6DD49100B561B8 /* RuleSet.swift */; };
+		1277C00A1B79B3F6000128E5 /* AutomataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1277C0091B79B3F6000128E5 /* AutomataCell.swift */; };
+		1277C00C1B79B47D000128E5 /* GalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1277C00B1B79B47D000128E5 /* GalleryViewController.swift */; };
 		128ED2DD1B71C64300F78AF4 /* CellViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128ED2DC1B71C64300F78AF4 /* CellViewDataSource.swift */; };
 /* End PBXBuildFile section */
 
@@ -49,6 +51,8 @@
 		12248B261B6D869B00B561B8 /* SingleGenCellularAutomata.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleGenCellularAutomata.swift; sourceTree = "<group>"; };
 		12248B281B6DC9C900B561B8 /* PushButtonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushButtonView.swift; sourceTree = "<group>"; };
 		12248B2A1B6DD49100B561B8 /* RuleSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RuleSet.swift; sourceTree = "<group>"; };
+		1277C0091B79B3F6000128E5 /* AutomataCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutomataCell.swift; sourceTree = "<group>"; };
+		1277C00B1B79B47D000128E5 /* GalleryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryViewController.swift; sourceTree = "<group>"; };
 		128ED2DC1B71C64300F78AF4 /* CellViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellViewDataSource.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -75,6 +79,7 @@
 			children = (
 				12248B001B69DC4700B561B8 /* CellularAutomataViewController.swift */,
 				1222D4A71B76DE7400E132F7 /* AnimationViewController.swift */,
+				1277C00B1B79B47D000128E5 /* GalleryViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -119,6 +124,7 @@
 			children = (
 				12248B281B6DC9C900B561B8 /* PushButtonView.swift */,
 				12248B221B6B2A8A00B561B8 /* CellView.swift */,
+				1277C0091B79B3F6000128E5 /* AutomataCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -298,6 +304,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1277C00C1B79B47D000128E5 /* GalleryViewController.swift in Sources */,
 				12248B011B69DC4700B561B8 /* CellularAutomataViewController.swift in Sources */,
 				12248B2B1B6DD49100B561B8 /* RuleSet.swift in Sources */,
 				12248B271B6D869B00B561B8 /* SingleGenCellularAutomata.swift in Sources */,
@@ -307,6 +314,7 @@
 				12248B291B6DC9C900B561B8 /* PushButtonView.swift in Sources */,
 				128ED2DD1B71C64300F78AF4 /* CellViewDataSource.swift in Sources */,
 				12248B251B6D834C00B561B8 /* Cell.swift in Sources */,
+				1277C00A1B79B3F6000128E5 /* AutomataCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

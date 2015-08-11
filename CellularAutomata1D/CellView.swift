@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CellView: UIView {
+class CellView: UICollectionViewCell {
 
     weak var dataSource: CellViewDataSource?
 
@@ -25,10 +25,13 @@ class CellView: UIView {
     }
     
     override func willMoveToSuperview(newSuperview: UIView?) {
+        println("willMove")
         calculateRowsAndCols()
     }
     
     override func drawRect(rect: CGRect) {
+        
+        println("drawRect")
         
         // set up graphics context
         var context = UIGraphicsGetCurrentContext()

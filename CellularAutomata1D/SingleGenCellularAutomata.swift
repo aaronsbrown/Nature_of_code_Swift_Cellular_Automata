@@ -21,6 +21,7 @@ class SingleGenCellularAutomata {
         }
         cells[cells.count / 2] = Cell(value: 1)
         
+        println("creating rule set for: \(ruleNumber)")
         ruleSet = RuleSet.forRuleNumber(ruleNumber)
     }
     
